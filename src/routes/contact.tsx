@@ -45,13 +45,13 @@ function ContactPage() {
             <a href={site.phoneHref} className="mt-1 block text-sm text-muted-foreground hover:text-accent">
               {site.phone}
             </a>
-            <p className="mt-1 text-xs text-muted-foreground">[Placeholder number — to be confirmed]</p>
+            <p className="mt-1 text-xs text-muted-foreground"></p>
           </div>
           <div className="surface-card p-6">
             <Mail className="h-5 w-5 text-accent" aria-hidden="true" />
             <h2 className="mt-3 font-display text-lg">Email</h2>
             <p className="mt-1 text-sm text-muted-foreground">{site.email}</p>
-            <p className="mt-1 text-xs text-muted-foreground">[Placeholder address — to be confirmed]</p>
+            <p className="mt-1 text-xs text-muted-foreground"></p>
           </div>
           <div className="surface-card p-6">
             <MapPin className="h-5 w-5 text-accent" aria-hidden="true" />

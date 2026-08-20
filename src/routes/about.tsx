@@ -50,14 +50,10 @@ function AboutPage() {
               retail spaces, along with packing, unpacking, loading and unloading.
             </p>
             <p>
-              Our approach is simple: understand the specifics of both addresses before quoting, size
-              the crew and truck honestly, protect the property properly and communicate clearly if
-              anything changes on the day.
+              Our process starts with understanding the details of your move, including both pickup and delivery locations. We then determine the appropriate crew, truck, equipment, and moving requirements for the job. Throughout the move, our focus is on protecting your belongings and property while keeping communication clear from start to finish.
             </p>
             <p>
-              [Placeholder — company background, founding details and team information to be added
-              once supplied. We do not publish claims about experience, certifications or awards
-              that have not been verified.]
+              Every move is different, so we take the time to understand your specific requirements and provide a straightforward moving experience without making unverified claims about our experience, certifications, or awards.
             </p>
           </div>
           <div className="overflow-hidden rounded-lg">

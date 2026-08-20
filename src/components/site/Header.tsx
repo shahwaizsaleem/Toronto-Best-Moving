@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, Phone, Truck, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { useState } from "react";
 import { site } from "@/lib/site";
+import logo from "@/assets/logo.png";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -19,19 +20,26 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur">
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex items-center gap-2.5" aria-label={`${site.name} home`}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-navy text-navy-foreground">
-            <Truck className="h-4.5 w-4.5" aria-hidden="true" />
-          </span>
-          <span className="leading-tight">
-            <span className="block font-display text-base font-semibold tracking-tight">
-              Toronto Best Moving
-            </span>
-            <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-              Greater Toronto Area
-            </span>
-          </span>
-        </Link>
+        <Link
+  to="/"
+  className="flex items-center gap-2.5"
+  aria-label={`${site.name} home`}
+>
+  <img
+    src={logo}
+    alt="Toronto Best Moving"
+    className="h-10 w-auto object-contain"
+  />
+
+  <span className="leading-tight">
+    <span className="block font-display text-base font-semibold tracking-tight">
+      Toronto Best Moving
+    </span>
+    <span className="block text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+      Greater Toronto Area
+    </span>
+  </span>
+</Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-6 lg:flex">
           {nav.map((item) => (

@@ -7,18 +7,18 @@ export const site = {
   legalName: "Toronto Best Moving",
   tagline: "Moving made simple. Relocation done right.",
   // TODO: replace with the real business phone number
-  phone: "(437) 423-19907",
-  phoneHref: "tel:+143742319907", 
+  phone: "(437) 423-1907",
+  phoneHref: "tel:+14374231907", 
   // TODO: replace with the real business email
   email: "info@torontobestmoving.ca",
   // TODO: replace with the real business address
   address: {
-    street: "Address to be confirmed",
+  
     city: "Toronto",
     region: "ON",
     country: "CA",
   },
-  hours: "Monday to Sunday — hours to be confirmed",
+  hours: "Monday to Sunday — 8am - 8pm",
   // Set to a full wa.me link once the company provides a WhatsApp number
   whatsapp: null as string | null,
 };

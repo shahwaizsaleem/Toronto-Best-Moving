@@ -5,7 +5,7 @@ import { posts } from "@/data/blog";
 import { services } from "@/lib/site";
 
 // TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://torontobestmoving.ca";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {

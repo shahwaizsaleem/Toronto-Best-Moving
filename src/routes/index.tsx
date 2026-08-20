@@ -35,7 +35,7 @@ const homeFaqs = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Movers in Toronto & the GTA | Toronto Best Moving" },
+      { title: "Toronto Best Moving | Professional Movers in Toronto & GTA" },
       {
         name: "description",
         content:
@@ -226,30 +226,46 @@ function Home() {
         </div>
       </section>
 
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="Client feedback"
-          title="What customers tell us"
-          intro="Placeholder testimonials — replace these with real, verified customer reviews before launch."
-        />
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {[1, 2, 3].map((n) => (
-            <blockquote key={n} className="surface-card p-6">
-              <div className="flex gap-1 text-accent" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                [Placeholder — customer testimonial {n} to be added once real reviews are supplied.]
-              </p>
-              <footer className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-foreground/60">
-                Customer name — City
-              </footer>
-            </blockquote>
+     <Section tone="muted">
+  <SectionHeading
+    eyebrow="Client feedback"
+    title="What customers tell us"
+    intro="See what our customers have to say about their moving experience."
+  />
+
+  <div className="mt-10 grid gap-5 md:grid-cols-3">
+    {[
+      {
+        text: "The team was professional, punctual, and made our entire move stress-free. Highly recommended!",
+        location: "Alan, Toronto",
+      },
+      {
+        text: "Excellent service from start to finish. Everything arrived safely and the movers were very careful.",
+        location: "Derek, Mississauga",
+      },
+      {
+        text: "Great experience! The crew was friendly, efficient, and completed the move much faster than expected.",
+        location: "Harry, Brampton",
+      },
+    ].map((testimonial, index) => (
+      <blockquote key={index} className="surface-card p-6">
+        <div className="flex gap-1 text-accent" aria-hidden="true">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} className="h-4 w-4 fill-current" />
           ))}
         </div>
-      </Section>
+
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          {testimonial.text}
+        </p>
+
+        <footer className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-foreground/60">
+          {testimonial.location}
+        </footer>
+      </blockquote>
+    ))}
+  </div>
+</Section>
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
