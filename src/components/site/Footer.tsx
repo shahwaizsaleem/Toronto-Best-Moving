@@ -103,8 +103,9 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <a href="/Privacy-Policy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-accent">
-              Privacy Policy </a>
+              <Link to="/terms_condition" className="hover:text-accent">
+                Privacy Polcy
+              </Link>
             </li>
           </ul>
           <Link

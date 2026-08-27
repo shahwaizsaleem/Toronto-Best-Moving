@@ -18,6 +18,7 @@ import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as Terms_conditionRouteImport } from './routes/terms_condition'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as LocationsIndexRouteImport } from './routes/locations.index'
@@ -70,6 +71,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Terms_conditionRoute = Terms_conditionRouteImport.update({
+  id: '/terms_condition',
+  path: '/terms_condition',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms_condition': typeof Terms_conditionRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/locations/$city': typeof LocationsCityRoute
   '/services/$service': typeof ServicesServiceRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/hiring': typeof HiringRoute
   '/quote': typeof QuoteRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms_condition': typeof Terms_conditionRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/locations/$city': typeof LocationsCityRoute
   '/services/$service': typeof ServicesServiceRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms_condition': typeof Terms_conditionRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/locations/$city': typeof LocationsCityRoute
   '/services/$service': typeof ServicesServiceRoute
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/services'
     | '/sitemap.xml'
+    | '/terms_condition'
     | '/blog/$slug'
     | '/locations/$city'
     | '/services/$service'
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/hiring'
     | '/quote'
     | '/sitemap.xml'
+    | '/terms_condition'
     | '/blog/$slug'
     | '/locations/$city'
     | '/services/$service'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/quote'
     | '/services'
     | '/sitemap.xml'
+    | '/terms_condition'
     | '/blog/$slug'
     | '/locations/$city'
     | '/services/$service'
@@ -211,6 +223,7 @@ export interface RootRouteChildren {
   QuoteRoute: typeof QuoteRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  Terms_conditionRoute: typeof Terms_conditionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -276,6 +289,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms_condition': {
+      id: '/terms_condition'
+      path: '/terms_condition'
+      fullPath: '/terms_condition'
+      preLoaderRoute: typeof Terms_conditionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/': {
@@ -373,6 +393,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuoteRoute: QuoteRoute,
   ServicesRoute: ServicesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  Terms_conditionRoute: Terms_conditionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
