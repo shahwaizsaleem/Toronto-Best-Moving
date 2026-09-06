@@ -102,6 +102,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
     scripts: [
+        {
+    src: "https://www.googletagmanager.com/gtag/js?id=AW-18413669340",
+    async: true,
+  },
+  {
+    children: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18413669340');
+    `,
+  },
       {
         type: "application/ld+json",
         children: JSON.stringify({
