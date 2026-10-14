@@ -65,7 +65,7 @@ export const quoteSchema = z.object({
 export type QuoteInput = z.infer<typeof quoteSchema>;
 
 export const submitQuote = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => quoteSchema.parse(data))
+  .validator((data: unknown) => quoteSchema.parse(data))
   .handler(async ({ data }) => {
     const accessKey = process.env["WEB3FORMS_ACCESS_KEY"];
 

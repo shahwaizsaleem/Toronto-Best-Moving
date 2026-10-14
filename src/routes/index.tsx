@@ -99,7 +99,7 @@ function Home() {
     background:
       "linear-gradient(90deg, rgba(10, 19, 36, 0.55) 0%, rgba(10, 19, 36, 0.30) 55%, rgba(10, 19, 36, 0.10) 100%)",
   }}
-/>
+/>  
     <div className="container-page relative py-24 md:py-32 lg:py-40">
       <div
         className="max-w-2xl"
