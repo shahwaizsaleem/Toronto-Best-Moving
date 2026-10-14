@@ -9,9 +9,13 @@ export function Footer() {
       <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4 lg:py-16">
         <div>
           <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-md bg-navy-foreground/10">
-              <Truck className="h-4.5 w-4.5" aria-hidden="true" />
-            </span>
+          <span className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-md bg-navy-foreground/10">
+  <img
+    src="/src/assets/logo.png"
+    alt="Toronto Best Moving"
+    className="h-full w-full object-contain"
+  />
+</span>
             <span className="font-display text-base font-semibold">{site.name}</span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-navy-foreground/65">

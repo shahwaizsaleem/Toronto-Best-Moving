@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Boxes, Building2, CheckCircle2, Clock, Phone, ShieldCheck, Star } from "lucide-react";
-import heroImg from "@/assets/hero-movers.jpg";
+import herovd from "@/assets/tbm.mp4";
 import skylineImg from "@/assets/toronto-skyline.jpg";
 import packingImg from "@/assets/packing.jpg";
 import { CtaBand } from "@/components/site/CtaBand";
@@ -65,50 +65,197 @@ const trust = [
 function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-navy text-navy-foreground">
-        <img
-          src={heroImg}
-          alt="Movers carrying a blanket-wrapped sofa from a home to a moving truck"
-          width={1600}
-          height={1104}
-          className="absolute inset-0 h-full w-full object-cover opacity-35"
-        />
+ 
+<>
+
+<>
+  <section
+    className="relative overflow-hidden bg-navy text-navy-foreground"
+    style={{ isolation: "isolate" }}
+  >
+    {/* Background video */}
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-hidden="true"
+      className="absolute inset-0 h-full w-full object-cover"
+      style={{
+        zIndex: -2,
+        animation: "heroVideoEnter 1.8s ease-out both",
+      }}
+    >
+      <source src={herovd} type="video/mp4" />
+    </video>
+
+    {/* Dark overlay for consistent text readability */}
+   <div
+  className="absolute inset-0"
+  aria-hidden="true"
+  style={{
+    zIndex: -1,
+    background:
+      "linear-gradient(90deg, rgba(10, 19, 36, 0.55) 0%, rgba(10, 19, 36, 0.30) 55%, rgba(10, 19, 36, 0.10) 100%)",
+  }}
+/>
+    <div className="container-page relative py-24 md:py-32 lg:py-40">
+      <div
+        className="max-w-2xl"
+        style={{
+          animation:
+            "heroTextEnter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both",
+        }}
+      >
+        <p
+          className="eyebrow"
+          style={{ animation: "heroTextEnter 0.8s ease-out both" }}
+        >
+          Toronto &amp; the Greater Toronto Area
+        </p>
+
+        <h1
+          className="mt-4 text-4xl leading-[1.08] text-white md:text-6xl"
+          style={{ animation: "heroTextEnter 1.1s ease-out both" }}
+        >
+          Moving made simple. Relocation done right.
+        </h1>
+
+        <p
+          className="mt-6 max-w-xl text-base leading-relaxed md:text-lg"
+          style={{
+            color: "rgba(255,255,255,0.92)",
+            textShadow: "0 1px 8px rgba(0,0,0,0.18)",
+            animation: "heroTextEnter 1.2s ease-out 0.15s both",
+          }}
+        >
+          Professional residential and commercial moving crews for houses,
+          condos and offices across Toronto and the GTA — planned properly,
+          protected carefully and finished on schedule.
+        </p>
+
         <div
-          className="absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/85 to-navy-deep/40"
-          aria-hidden="true"
-        />
-        <div className="container-page relative py-24 md:py-32 lg:py-40">
-          <div className="max-w-2xl rise-in">
-            <p className="eyebrow">Toronto &amp; the Greater Toronto Area</p>
-            <h1 className="mt-4 text-4xl leading-[1.08] md:text-6xl">
-              Moving made simple. Relocation done right.
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-navy-foreground/75 md:text-lg">
-              Professional residential and commercial moving crews for houses, condos and offices
-              across Toronto and the GTA — planned properly, protected carefully and finished on
-              schedule.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <QuoteButton label="Get a free quote" />
-              <a
-                href={site.phoneHref}
-                className="inline-flex items-center gap-2 rounded-md border border-navy-foreground/30 px-6 py-3 text-sm font-semibold tracking-wide transition-colors hover:bg-navy-foreground/10"
-              >
-                <Phone className="h-4 w-4" aria-hidden="true" /> Call now
-              </a>
-            </div>
-            <ul className="mt-10 flex flex-wrap gap-x-7 gap-y-2 text-sm text-navy-foreground/70">
-              {["Residential & commercial", "Condo and high-rise specialists", "16 GTA service areas"].map(
-                (t) => (
-                  <li key={t} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-accent" aria-hidden="true" /> {t}
-                  </li>
-                ),
-              )}
-            </ul>
-          </div>
+          className="mt-9 flex flex-wrap gap-4"
+          style={{
+            animation: "heroTextEnter 1.2s ease-out 0.3s both",
+          }}
+        >
+          {/* Primary CTA */}
+          <span
+            className="inline-flex rounded-md"
+            style={{
+              transition:
+                "transform 280ms ease, box-shadow 280ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.boxShadow =
+                "0 12px 30px rgba(0,0,0,0.28)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            <QuoteButton label="Get a free quote" />
+          </span>
+
+          {/* Call now CTA */}
+          <a
+            href={site.phoneHref}
+            className="inline-flex items-center gap-2 rounded-md px-6 py-3 text-sm font-bold tracking-wide"
+            style={{
+              color: "#FFFFFF",
+              backgroundColor: "#147D83",
+              border: "1px solid rgba(255,255,255,0.22)",
+              boxShadow: "0 5px 16px rgba(0,0,0,0.15)",
+              transition:
+                "transform 280ms ease, background-color 280ms ease, box-shadow 280ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-3px)";
+              e.currentTarget.style.backgroundColor = "#0F686D";
+              e.currentTarget.style.boxShadow =
+                "0 12px 28px rgba(0,0,0,0.28)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.backgroundColor = "#147D83";
+              e.currentTarget.style.boxShadow =
+                "0 5px 16px rgba(0,0,0,0.15)";
+            }}
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call now
+          </a>
         </div>
-      </section>
+
+        {/* High-contrast service highlights */}
+        <ul
+          className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm font-semibold"
+          style={{
+            color: "#FFFFFF",
+            textShadow: "0 1px 6px rgba(0,0,0,0.4)",
+            animation: "heroTextEnter 1.2s ease-out 0.45s both",
+          }}
+        >
+          {[
+            "Residential & commercial",
+            "Condo and high-rise specialists",
+            "16 GTA service areas",
+          ].map((t) => (
+            <li key={t} className="flex items-center gap-2">
+              <CheckCircle2
+                className="h-4 w-4 shrink-0"
+                style={{ color: "#66D6CE" }}
+                aria-hidden="true"
+              />
+              <span>{t}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    {/* Inline animations */}
+    <style>{`
+      @keyframes heroTextEnter {
+        from {
+          opacity: 0;
+          transform: translateX(-32px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes heroVideoEnter {
+        from {
+          opacity: 0.4;
+          transform: scale(1.04);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    `}</style>
+  </section>
+</>
+
+</>
+
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.15fr] lg:items-end">
@@ -195,7 +342,7 @@ function Home() {
           width={1600}
           height={900}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover opacity-25"
+          className="absolute inset-0 h-full w-full object-cover "
         />
         <div className="absolute inset-0 bg-navy-deep/70" aria-hidden="true" />
         <div className="container-page relative py-16 md:py-24">

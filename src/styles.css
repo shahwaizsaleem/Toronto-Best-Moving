@@ -7,6 +7,10 @@
 /*
  * Toronto Best Moving — design system
  * Palette: midnight navy, ivory, cool slate, silver, harbour teal accent.
+ *
+ * Signature idea: "blueprint + route". Moving is planned on floor plans and
+ * travels along routes, so navy sections carry a fine blueprint grid, dividers
+ * look like packing tape or a dotted route, and cards get a tape-strip edge.
  */
 
 @theme inline {
@@ -49,6 +53,16 @@
 
   --shadow-card: 0 1px 2px oklch(0.2 0.04 258 / 0.04), 0 12px 32px -18px oklch(0.2 0.04 258 / 0.28);
   --shadow-lift: 0 2px 6px oklch(0.2 0.04 258 / 0.06), 0 28px 60px -28px oklch(0.2 0.04 258 / 0.35);
+
+  /* Motion tokens */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --duration-slow: 400ms;
+
+  /* Spacing tokens: tighter rhythm than before */
+  --space-section: clamp(2.5rem, 5vw, 4rem);
+  --space-card: 1.25rem;
 }
 
 :root {
@@ -96,6 +110,15 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition:
+      background-color var(--duration-slow) ease,
+      color var(--duration-slow) ease;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-foreground);
   }
 
   h1,
@@ -104,19 +127,87 @@
   h4 {
     font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Interactive elements: smooth colour, border, shadow and press feedback */
+  a,
+  button,
+  [role="button"],
+  input,
+  textarea,
+  select,
+  summary {
+    transition:
+      color var(--duration-fast) ease,
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      box-shadow var(--duration-base) var(--ease-smooth),
+      opacity var(--duration-fast) ease,
+      transform var(--duration-fast) var(--ease-smooth);
+  }
+
+  button:active:not(:disabled),
+  [role="button"]:active {
+    transform: translateY(1px) scale(0.99);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+    transition: outline-offset var(--duration-fast) var(--ease-smooth);
+  }
+
+  /* Slim scrollbar in brand colours */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--navy) var(--slate-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
+
+/* ---------- Layout ---------- */
 
 @utility container-page {
   width: 100%;
   margin-inline: auto;
   max-width: 80rem;
-  padding-inline: 1.25rem;
+  padding-inline: 1rem;
   @media (min-width: 1024px) {
-    padding-inline: 2rem;
+    padding-inline: 1.5rem;
   }
 }
+
+/* Vertical padding for page sections (tighter than typical py-20/py-24) */
+@utility section-y {
+  padding-block: var(--space-section);
+}
+
+/* Standard inner padding for cards */
+@utility pad-card {
+  padding: var(--space-card);
+}
+
+/* ---------- Type ---------- */
 
 @utility eyebrow {
   font-family: var(--font-sans);
@@ -125,6 +216,9 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-accent);
+  transition:
+    color var(--duration-base) ease,
+    letter-spacing var(--duration-base) var(--ease-smooth);
 }
 
 @utility rule-accent {
@@ -132,49 +226,199 @@
     content: "";
     display: block;
     width: 2.5rem;
-    height: 2px;
+    height: 3px;
+    border-radius: 2px;
     background: var(--color-accent);
-    margin-bottom: 1rem;
+    margin-bottom: 0.625rem;
+    transition:
+      width var(--duration-slow) var(--ease-smooth),
+      background-color var(--duration-base) ease;
+  }
+
+  &:hover::before {
+    width: 4rem;
   }
 }
 
+@utility prose-body {
+  color: var(--color-muted-foreground);
+  line-height: 1.65;
+  transition: color var(--duration-base) ease;
+
+  & p + p {
+    margin-top: 0.75rem;
+  }
+
+  & a {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition:
+      color var(--duration-fast) ease,
+      text-decoration-color var(--duration-base) ease;
+
+    &:hover {
+      color: var(--color-accent);
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+/* ---------- Surfaces ---------- */
+
+/* Card with a "packing tape" strip that slides across the top on hover */
 @utility surface-card {
+  position: relative;
+  overflow: hidden;
   background: var(--color-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   transition:
-    box-shadow 220ms ease,
-    transform 220ms ease,
-    border-color 220ms ease;
+    box-shadow var(--duration-base) ease,
+    transform var(--duration-base) ease,
+    border-color var(--duration-base) ease,
+    background-color var(--duration-base) ease;
+  will-change: transform;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 3px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-slow) var(--ease-smooth);
+  }
 
   &:hover {
     box-shadow: var(--shadow-lift);
     transform: translateY(-2px);
     border-color: color-mix(in oklab, var(--color-accent) 35%, var(--color-border));
   }
-}
 
-@utility prose-body {
-  color: var(--color-muted-foreground);
-  line-height: 1.75;
+  &:hover::before {
+    transform: scaleX(1);
+  }
 
-  & p + p {
-    margin-top: 1rem;
+  &:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-card);
+    transition-duration: var(--duration-fast);
   }
 }
+
+/* Navy section with a fine blueprint grid (use for hero, CTA, footer) */
+@utility bg-blueprint {
+  color: var(--color-navy-foreground);
+  background-color: var(--color-navy-deep);
+  background-image:
+    linear-gradient(oklch(1 0 0 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 0.045) 1px, transparent 1px),
+    linear-gradient(oklch(1 0 0 / 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(1 0 0 / 0.025) 1px, transparent 1px);
+  background-size:
+    96px 96px,
+    96px 96px,
+    24px 24px,
+    24px 24px;
+}
+
+/* Small pill with a teal dot: for "Licensed", "Insured", "Free quote" etc. */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-navy);
+  background: color-mix(in oklab, var(--color-accent) 10%, var(--color-card));
+  border: 1px solid color-mix(in oklab, var(--color-accent) 28%, transparent);
+  border-radius: 999px;
+  transition:
+    background-color var(--duration-base) ease,
+    border-color var(--duration-base) ease;
+
+  &::before {
+    content: "";
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+  }
+
+  &:hover {
+    background: color-mix(in oklab, var(--color-accent) 18%, var(--color-card));
+    border-color: var(--color-accent);
+  }
+}
+
+/* ---------- Dividers ---------- */
+
+/* Diagonal packing-tape stripe */
+@utility divider-tape {
+  height: 6px;
+  border-radius: 1px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-accent) 0 8px,
+    var(--color-navy) 8px 16px
+  );
+}
+
+/* Dotted route with a start and end pin */
+@utility route-line {
+  position: relative;
+  height: 2px;
+  margin-block: 0.75rem;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0 8px,
+    transparent 8px 16px
+  );
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: var(--color-accent);
+    transform: translateY(-50%);
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-accent) 22%, transparent);
+  }
+}
+
+/* ---------- Motion ---------- */
 
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateX(-24px);
   }
+
   to {
     opacity: 1;
-    transform: none;
+    transform: translateX(0);
   }
 }
 
+/* Set style="--i: 1" (2, 3...) on siblings to stagger them */
 @utility rise-in {
-  animation: rise-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
 }
